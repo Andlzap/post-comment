@@ -26,15 +26,32 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async(req, res) => {
     const salt = bcrypt.genSaltSync(10)
-    const { login, senha } = req.body
+    const { login, senha, dataNascimento } = req.body
     const users = await User.create({
         login,
-        senha: bcrypt.hashSync(senha, salt)
+        senha: bcrypt.hashSync(senha, salt),
+        dataNascimento
     })
     return res.json(users)
 })
 
-router.put('/', async(req, res) => {})
+router.put('/', async(req, res) => {
+    try 
+    {
+    const users = await User.findByPk(req.body.id)
+    const { login, senha, dataNascimento} = req.body
+    users.login = login
+    users.senha = senha
+    users.dataNascimento = dataNascimento
+    await users.save()
+    res.json({message: `Usuario '${login}' atualizado com sucesso`})
+    } 
+    catch (error)
+    {
+        res.json({message: error.message})
+    }
+    
+})
 
 router.delete('/:id', async(req, res) => {
     const users = await User.findByPk(req.params.id)
