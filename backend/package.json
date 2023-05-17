@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --inspect src/server.js"
+    "dev": "nodemon --inspect src/server.js",
+    "generateHash": "node -e \"console.log(require('crypto').randomBytes(256).toString('base64'))\""
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,7 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^8.11.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.31.1"

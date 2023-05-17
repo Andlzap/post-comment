@@ -3,6 +3,7 @@ const db = require('../src/db')
 const User = require('../models/user')(db.sequelize, db.DataTypes)
 const bcrypt = require('bcryptjs')
 
+
 router.get('/', async (req, res) => {
     const { login } = req.query
     const where = login ? { where: { login } } : undefined
