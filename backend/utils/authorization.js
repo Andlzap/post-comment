@@ -8,6 +8,11 @@ const authorized = async (req, res, next) => {
 
     const [bearer, token] = authorization.split(' ')
 
+    if(!authorization)
+    {
+        return res.json({ message: 'Envie as credenciais de autorização!!!'})
+    }
+
     if (!/Bearer/.test(bearer))
     {
         return res.json({ message: 'O tipo de autenticação não é a esperada!!!'})
